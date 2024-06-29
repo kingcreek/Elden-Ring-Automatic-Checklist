@@ -301,7 +301,7 @@ function getCard(item_name, category_name) {
 					 title="${item_name}">
 <br>
 <p class="card-text">${item_name}</p>
-<a href="https://eldenring.wiki.fextralife.com/${item_name.replaceAll(" ", "+")}" class="stretched-link" target="_blank"> </a> </div>
+<a href="https://eldenring.wiki.fextralife.com/${item_name.replace(/ \+\d+$/, "").replaceAll(" ", "+")}" class="stretched-link" target="_blank"> </a> </div>
 </div>`;
 }
 
