@@ -138,7 +138,11 @@ function buffer_equal(buf1, buf2) {
 }
 
 function getInventory(slot) {
-  index = subfinder(slot, pattern) + pattern.byteLength - 5;
+  index = subfinder(slot, pattern) + pattern.byteLength + 8
+  if (!index) {
+      index = subfinder(slot, pattern_dlc) + pattern_dlc.byteLength + 3
+      isDlcFile = true
+  }
   index1 = subfinder(slot.subarray(index, slot.byteLength), new Uint8Array(50).fill(0)) + index + 6;
   return slot.subarray(index, index1);
 }
@@ -176,7 +180,7 @@ function getOwnedAndNot(file_read, selected_slot) {
     let saves_array = new Uint8Array(file_read);
     let slots = get_slot_ls(saves_array);
     let inventory = Array.from(getInventory(slots[selected_slot]));
-    let id_list = split(inventory, 4);
+    let id_list = split(inventory, isDlcFile ? 8 : 16)
     id_list.forEach((raw_id, index) => (id_list[index] = getIdReversed(raw_id).toUpperCase()));
 
     let owned_items = JSON.parse(JSON.stringify(item_dict_template));
