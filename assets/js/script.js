@@ -1,27 +1,9 @@
 const fileSelector = document.getElementById("savefile");
-/*
+
 let pattern = new Uint8Array([
-  255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0,
-  255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0xF8, 0xFF, 0xFF , 0x00, 0x00, 0xF0, 0xFF, 0xFF, 0x01, 0x00, 0xE0, 0xFF, 0xFF, 0x03, 0x00, 0xC0, 0xFF, 0xFF, 0x07, 0x00, 0x80, 0xFF, 0xFF, 0x0F, 0x00, 0x00, 0xFF, 0xFF, 0x1F, 0x00, 0x00, 0xFE, 0xFF, 0x3F, 0x00, 0x00, 0xFC, 0xFF, 0x7F, 0x00, 0x00, 0xF8, 0xFF, 0xFF, 0x00, 0x00, 0xF0, 0xFF
 ]);
-*/
-let pattern = new Uint8Array([
-  255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 31,
-]);
+
 
 let file_read = null;
 let inventory = null;
@@ -156,7 +138,7 @@ function buffer_equal(buf1, buf2) {
 }
 
 function getInventory(slot) {
-  index = subfinder(slot, pattern) + pattern.byteLength + 56;
+  index = subfinder(slot, pattern) + pattern.byteLength + 1808;
   index1 = subfinder(slot.subarray(index, slot.byteLength), new Uint8Array(50).fill(0)) + index + 6;
   return slot.subarray(index, index1);
 }
@@ -194,7 +176,7 @@ function getOwnedAndNot(file_read, selected_slot) {
     let saves_array = new Uint8Array(file_read);
     let slots = get_slot_ls(saves_array);
     let inventory = Array.from(getInventory(slots[selected_slot]));
-    let id_list = split(inventory, 16);
+    let id_list = split(inventory, 8);
     id_list.forEach((raw_id, index) => (id_list[index] = getIdReversed(raw_id).toUpperCase()));
 
     let owned_items = JSON.parse(JSON.stringify(item_dict_template));
