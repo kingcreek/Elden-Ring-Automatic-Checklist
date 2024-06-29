@@ -8,6 +8,8 @@
     "03D85830": {"name": "Smithscript Cirque","class": "Backhand Blade"},
     "03D87F40": {"name": "Curseblade's Cirque","class": "Backhand Blade"},
     "02A70420": {"name": "Rabbath's Cannon","class": "Ballista"},
+    "04153A20": {"name": "Beast Claw (Weapon)", "class": "Beast Claw"},
+    "04156130": {"name": "Red Bear's Claw","class": "Beast Claw"},
     "0269FB20": {"name": "Bone Bow","class": "Bow"},
     "02796470": {"name": "Ansbach's Longbow","class": "Bow"},
     "015752A0": {"name": "Claws of Night","class": "Claw"},
